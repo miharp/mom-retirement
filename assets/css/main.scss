@@ -1,0 +1,373 @@
+---
+---
+
+/* ============================================================
+   Variables
+   ============================================================ */
+$primary: #2c6e49;
+$accent: #f4a261;
+$text: #333;
+$muted: #666;
+$border: #ddd;
+$bg-light: #f9f9f9;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: $text;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   Layout
+   ============================================================ */
+.wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ============================================================
+   Header / Nav
+   ============================================================ */
+.site-header {
+  background: $primary;
+  padding: 1rem 0;
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .site-title {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .site-nav a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-size: 0.95rem;
+
+    &:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+  }
+}
+
+/* ============================================================
+   Main content
+   ============================================================ */
+.page-content {
+  padding: 2rem 0;
+}
+
+h1 { font-size: 1.8rem; margin-top: 0; }
+h2 { font-size: 1.3rem; border-bottom: 2px solid $primary; padding-bottom: 0.25rem; margin-top: 2rem; }
+h3 { font-size: 1.1rem; }
+
+/* ============================================================
+   Care-level badges
+   ============================================================ */
+.badge {
+  display: inline-block;
+  padding: 0.2em 0.65em;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-right: 0.4rem;
+  text-transform: capitalize;
+}
+
+.badge-independent    { background: #d1fae5; color: #065f46; }
+.badge-assisted       { background: #dbeafe; color: #1e40af; }
+.badge-memory-care    { background: #fce7f3; color: #9d174d; }
+.badge-skilled-nursing { background: #fef3c7; color: #92400e; }
+
+/* ============================================================
+   Facility list (index page)
+   ============================================================ */
+.facility-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.facility-card {
+  border: 1px solid $border;
+  border-radius: 8px;
+  padding: 1.25rem;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  transition: box-shadow 0.15s;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  h2 {
+    margin: 0 0 0.5rem;
+    border: none;
+    font-size: 1.1rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: $primary;
+    font-weight: 700;
+
+    &:hover { text-decoration: underline; }
+  }
+
+  .card-cost {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: $primary;
+    margin: 0.5rem 0;
+  }
+
+  .card-meta {
+    font-size: 0.85rem;
+    color: $muted;
+    margin: 0.25rem 0;
+  }
+
+  .care-levels {
+    margin-top: 0.75rem;
+  }
+}
+
+/* ============================================================
+   Facility detail page
+   ============================================================ */
+.facility-header {
+  margin-bottom: 1.5rem;
+
+  .facility-meta p {
+    margin: 0.2rem 0;
+    color: $muted;
+  }
+
+  .care-levels {
+    margin-top: 0.75rem;
+  }
+}
+
+.cost-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.75rem;
+
+  th, td {
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+    border: 1px solid $border;
+    vertical-align: top;
+  }
+
+  th {
+    background: $bg-light;
+    font-weight: 600;
+    width: 180px;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+}
+
+/* ============================================================
+   Visit cards
+   ============================================================ */
+.visit-card {
+  border: 1px solid $border;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  background: #fff;
+
+  h3 {
+    margin: 0 0 0.75rem;
+    color: $primary;
+  }
+}
+
+.ratings {
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.rating-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  &.overall {
+    font-weight: 700;
+    border-top: 1px solid $border;
+    padding-top: 0.4rem;
+    margin-top: 0.2rem;
+  }
+}
+
+.rating-label {
+  min-width: 110px;
+  font-size: 0.9rem;
+  color: $muted;
+}
+
+.star-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.star {
+  font-size: 1.1rem;
+  line-height: 1;
+
+  &.filled { color: $accent; }
+  &.empty  { color: #ccc; }
+}
+
+.rating-number {
+  font-size: 0.8rem;
+  color: $muted;
+  margin-left: 0.3rem;
+}
+
+.visit-notes {
+  background: $bg-light;
+  border-left: 3px solid $primary;
+  padding: 0.75rem 1rem;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.95rem;
+  white-space: pre-line;
+
+  p { margin: 0; }
+}
+
+/* ============================================================
+   Comparison table
+   ============================================================ */
+.compare-table-wrapper {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+
+  th, td {
+    padding: 0.6rem 0.75rem;
+    border: 1px solid $border;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background: $primary;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  tr:nth-child(even) td {
+    background: $bg-light;
+  }
+
+  a {
+    color: $primary;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+}
+
+/* ============================================================
+   Tax savings / effective cost
+   ============================================================ */
+.card-effective {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: $primary;
+}
+
+.savings-note {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: darken(#2c6e49, 5%);
+}
+
+.current-card {
+  max-width: 360px;
+  border-color: #92400e;
+  background: #fffbeb;
+  margin-bottom: 1.5rem;
+}
+
+.badge-current {
+  display: inline-block;
+  padding: 0.15em 0.5em;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: #fef3c7;
+  color: #92400e;
+  vertical-align: middle;
+  margin-left: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.current-row td {
+  background: #fffbeb !important;
+  font-weight: 500;
+}
+
+.vs-savings {
+  font-weight: 700;
+  color: #065f46;
+}
+
+.vs-over {
+  font-weight: 700;
+  color: #b91c1c;
+}
+
+.baseline-cell {
+  color: $muted;
+  text-align: center;
+}
+
+.savings-footnote {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: $muted;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer {
+  border-top: 1px solid $border;
+  padding: 1.5rem 0;
+  font-size: 0.85rem;
+  color: $muted;
+  margin-top: 3rem;
+}

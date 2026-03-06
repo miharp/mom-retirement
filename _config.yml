@@ -1,0 +1,26 @@
+title: "Mom's Assisted Living Research"
+description: "Tracking visits to potential assisted living facilities"
+baseurl: "/mom-retirement"
+url: "https://miharp.github.io"
+
+theme: minima
+
+# Monthly CA state tax savings from moving to FL ($3,500/yr ÷ 12)
+fl_tax_savings: 292
+
+collections:
+  facilities:
+    output: true
+    permalink: /facilities/:name/
+  visits:
+    output: false
+
+defaults:
+  - scope:
+      path: ""
+      type: facilities
+    values:
+      layout: facility
+
+plugins:
+  - jekyll-feed

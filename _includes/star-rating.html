@@ -1,0 +1,11 @@
+{% assign r = include.rating | plus: 0 %}
+<span class="star-rating" title="{{ r }}/5">
+  {% for i in (1..5) %}
+    {% if i <= r %}
+      <span class="star filled">&#9733;</span>
+    {% else %}
+      <span class="star empty">&#9734;</span>
+    {% endif %}
+  {% endfor %}
+  <span class="rating-number">({{ r }}/5)</span>
+</span>

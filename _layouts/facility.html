@@ -1,0 +1,132 @@
+---
+layout: default
+---
+<article class="facility-detail">
+  <header class="facility-header">
+    <h1>{{ page.name }}</h1>
+    <div class="facility-meta">
+      <p class="address">{{ page.address }}</p>
+      {% if page.phone %}<p class="phone"><a href="tel:{{ page.phone }}">{{ page.phone }}</a></p>{% endif %}
+      {% if page.website %}<p class="website"><a href="{{ page.website }}" target="_blank">{{ page.website }}</a></p>{% endif %}
+      {% if page.distance_miles %}<p class="distance">{{ page.distance_miles }} miles away</p>{% endif %}
+    </div>
+
+    <div class="care-levels">
+      {% for level in page.care_levels %}
+        <span class="badge badge-{{ level | replace: '_', '-' }}">{{ level | replace: '_', ' ' | capitalize }}</span>
+      {% endfor %}
+    </div>
+  </header>
+
+  <section class="cost-section">
+    <h2>Cost</h2>
+    <table class="cost-table">
+      {% if page.cost.unit %}
+      <tr>
+        <th>Unit</th>
+        <td>{{ page.cost.unit }}</td>
+      </tr>
+      {% endif %}
+      <tr>
+        <th>Rent/mo</th>
+        <td>${{ page.cost.base_monthly }}</td>
+      </tr>
+      {% if page.cost.care_monthly %}
+      <tr>
+        <th>Care/mo</th>
+        <td>${{ page.cost.care_monthly }}</td>
+      </tr>
+      {% endif %}
+      {% if page.cost.other_monthly %}
+      <tr>
+        <th>Other/mo</th>
+        <td>${{ page.cost.other_monthly }}</td>
+      </tr>
+      {% endif %}
+      {% assign total = page.cost.base_monthly | plus: page.cost.care_monthly | plus: page.cost.other_monthly %}
+      <tr>
+        <th>Total/mo</th>
+        <td><strong>${{ total }}</strong>
+          {% if page.state == "FL" %}
+            {% assign effective = total | minus: site.fl_tax_savings %}
+            &rarr; <strong class="effective-cost">${{ effective }} effective</strong>
+            <span class="savings-note">(after ${{ site.fl_tax_savings }}/mo CA tax savings)</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% if page.cost.community_fee %}
+      <tr>
+        <th>Move-in Fee</th>
+        <td>${{ page.cost.community_fee }} (one-time community fee)</td>
+      </tr>
+      {% endif %}
+      {% if page.cost.includes %}
+      <tr>
+        <th>Includes</th>
+        <td>
+          <ul>
+            {% for item in page.cost.includes %}
+              <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+      </tr>
+      {% endif %}
+      {% if page.cost.unit_options %}
+      <tr>
+        <th>Unit Options</th>
+        <td>
+          <ul>
+            {% for opt in page.cost.unit_options %}
+              <li>{{ opt }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+      </tr>
+      {% endif %}
+      {% if page.cost.extra_fees %}
+      <tr>
+        <th>Notes</th>
+        <td>{{ page.cost.extra_fees }}</td>
+      </tr>
+      {% endif %}
+    </table>
+  </section>
+
+  {% assign facility_visits = site.visits | where: "facility", page.slug | sort: "date" | reverse %}
+  {% if facility_visits.size > 0 %}
+  <section class="visits-section">
+    <h2>Visit Notes</h2>
+    {% for visit in facility_visits %}
+    <div class="visit-card">
+      <h3>Visit: {{ visit.date | date: "%B %-d, %Y" }}</h3>
+      <div class="ratings">
+        <div class="rating-row">
+          <span class="rating-label">Staff</span>
+          {% include star-rating.html rating=visit.staff_rating %}
+        </div>
+        <div class="rating-row">
+          <span class="rating-label">Cleanliness</span>
+          {% include star-rating.html rating=visit.cleanliness_rating %}
+        </div>
+        <div class="rating-row">
+          <span class="rating-label">Amenities</span>
+          {% include star-rating.html rating=visit.amenities_rating %}
+        </div>
+        <div class="rating-row overall">
+          <span class="rating-label">Overall</span>
+          {% include star-rating.html rating=visit.overall_rating %}
+        </div>
+      </div>
+      {% if visit.content != "" %}
+      <div class="visit-notes">
+        {{ visit.content }}
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {{ content }}
+</article>
