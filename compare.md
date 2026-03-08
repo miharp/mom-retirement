@@ -79,7 +79,9 @@ title: Compare Facilities
         {% endfor %}
       </td>
       <td>${{ facility.cost.base_monthly }}</td>
-      <td>{% if facility.cost.care_monthly %}${{ facility.cost.care_monthly }}{% else %}&mdash;{% endif %}</td>
+      <td>{% if facility.cost.care_monthly %}${{ facility.cost.care_monthly }}{% elsif facility.cost.wellness_package_monthly %}
+        <span title="Wellness package L1–L6">${{ facility.cost.wellness_package_monthly.level_1 }}–${{ facility.cost.wellness_package_monthly.level_6 }}/mo</span>
+      {% else %}&mdash;{% endif %}</td>
       <td>${{ total }}</td>
       <td>{% if facility.state == "FL" %}<span class="vs-savings">-${{ site.fl_tax_savings }}</span>{% else %}&mdash;{% endif %}</td>
       <td><strong>${{ effective }}</strong></td>
